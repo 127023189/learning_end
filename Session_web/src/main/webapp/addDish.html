@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加菜品</title>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+    <form class="form-horizontal" method="post" action="/addDishServlet">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">菜品名称</label>
+            <div class="col-sm-3">
+                <input type="text" name="name" class="form-control" placeholder="请输入菜名" id="name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">菜品价格</label>
+            <div class="col-sm-3">
+                <input type="text" name="price" class="form-control" placeholder="请输入金额" id="price">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">菜品描述</label>
+            <div class="col-sm-3">
+                <input type="text" name="description" class="form-control" placeholder="请输入菜品描述" id="description">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">保存</button>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
