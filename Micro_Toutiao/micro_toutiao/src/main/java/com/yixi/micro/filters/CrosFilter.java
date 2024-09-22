@@ -29,4 +29,14 @@ public class CrosFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        System.out.println("初始化");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("销毁");
+    }
 }
