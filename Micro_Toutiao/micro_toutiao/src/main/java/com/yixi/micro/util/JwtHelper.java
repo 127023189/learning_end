@@ -6,11 +6,12 @@ import io.jsonwebtoken.*;
 import java.util.Date;
 
 public class JwtHelper {
-    private static long tokenExpiration = 24*60*60*7;
+    private static long tokenExpiration = 1000*24*60*60*10;
     private static String tokenSignKey = "123456";
 
     //生成token字符串
     public static String createToken(Long userId) {
+        System.out.println(new Date(System.currentTimeMillis()));
         String token = Jwts.builder()
                 .setSubject("YYGH-USER")
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
