@@ -16,4 +16,11 @@ public interface NewsUserService {
      * @return
      */
     NewsUser findByUid(Integer uid);
+
+    /**
+     * 根据前端数据进行注册
+     * @param registerUser
+     * @return
+     */
+    int registUser(NewsUser registerUser);
 }
