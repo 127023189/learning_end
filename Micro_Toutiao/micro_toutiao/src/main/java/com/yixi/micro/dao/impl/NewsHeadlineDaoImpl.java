@@ -2,6 +2,7 @@ package com.yixi.micro.dao.impl;
 
 import com.yixi.micro.dao.BaseDao;
 import com.yixi.micro.dao.NewsHeadlineDao;
+import com.yixi.micro.pojo.NewsHeadline;
 import com.yixi.micro.pojo.vo.HeadlineDetailVo;
 import com.yixi.micro.pojo.vo.HeadlinePageVo;
 import com.yixi.micro.pojo.vo.HeadlineQueryVo;
@@ -12,6 +13,17 @@ import java.util.List;
 
 
 public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao{
+
+
+    @Override
+    public int updateNewsHeadline(NewsHeadline newsHeadline) {
+        String sql = "update  news_headline set title=?, article= ? , type =? , update_time = NOW() where hid = ? ";
+        return baseUpdate(sql,
+                newsHeadline.getTitle(),
+                newsHeadline.getArticle(),
+                newsHeadline.getType(),
+                newsHeadline.getHid());
+    }
 
     @Override
     public int findPageCount(HeadlineQueryVo headLineQueryVo) {
@@ -85,6 +97,31 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao{
     @Override
     public int increasePageViews(Integer hid) {
         String sql ="update news_headline set page_views = page_views +1 where hid =?";
+        return baseUpdate(sql,hid);
+    }
+
+    @Override
+    public Integer addNewsHeadline(NewsHeadline newsHeadline) {
+        String sql = "insert into news_headline values(null,?,?,?,?,0,NOW(),NOW(),0)";
+        return baseUpdate(sql,newsHeadline.getTitle(),
+                newsHeadline.getArticle(),
+                newsHeadline.getType(),
+                newsHeadline.getPublisher()
+                );
+    }
+
+    @Override
+    public NewsHeadline findHeadlineByHid(Integer hid) {
+        String sql = "select hid,title,article,type,publisher,page_views pageViews from news_headline where hid =?";
+        List<NewsHeadline> newsHeadlineList = baseQuery(NewsHeadline.class, sql, hid);
+        if(null != newsHeadlineList && newsHeadlineList.size()>0)
+            return newsHeadlineList.get(0);
+        return null;
+    }
+
+    @Override
+    public int removeByHid(int hid) {
+        String sql = "update news_headline set is_deleted =1 ,  update_time =NOW() where hid = ? ";
         return baseUpdate(sql,hid);
     }
 }

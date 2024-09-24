@@ -16,4 +16,22 @@ public interface NewsHeadlineService {
     Map<String,Object> findPage(HeadlineQueryVo headLineQueryVo);
 
     HeadlineDetailVo findHeadlineDetail(Integer hid);
+
+    Integer addNewsHeadline(NewsHeadline newsHeadline);
+
+    /**
+     * 查询新闻
+     * @param hid
+     * @return
+     */
+    NewsHeadline findHeadlineByHid(int hid);
+
+    /**
+     * 修改数据
+     * @param newsHeadline
+     * @return
+     */
+    int updateNewsHeadline(NewsHeadline newsHeadline);
+
+    int removeByHid(int hid);
 }

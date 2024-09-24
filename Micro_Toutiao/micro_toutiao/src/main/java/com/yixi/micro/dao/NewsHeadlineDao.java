@@ -1,5 +1,6 @@
 package com.yixi.micro.dao;
 
+import com.yixi.micro.pojo.NewsHeadline;
 import com.yixi.micro.pojo.vo.HeadlineDetailVo;
 import com.yixi.micro.pojo.vo.HeadlinePageVo;
 import com.yixi.micro.pojo.vo.HeadlineQueryVo;
@@ -30,4 +31,22 @@ public interface NewsHeadlineDao {
     HeadlineDetailVo findHeadlineDetail(Integer hid);
 
     int increasePageViews(Integer hid);
+
+    /**
+     * 添加新闻
+     * @param newsHeadline
+     * @return
+     */
+    Integer addNewsHeadline(NewsHeadline newsHeadline);
+
+    NewsHeadline findHeadlineByHid(Integer hid);
+
+    int updateNewsHeadline(NewsHeadline newsHeadline);
+
+    /**
+     * 根据新闻id删除
+     * @param hid
+     * @return
+     */
+    int removeByHid(int hid);
 }

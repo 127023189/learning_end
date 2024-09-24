@@ -132,4 +132,25 @@ public class NewsUserController extends BaseController{
         WebUtil.writeJson(resp,result);
 
     }
+
+    /**
+     * 用户在进行发布新闻之前必须处于登录状态
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void checkLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String token = req.getHeader("token");
+        Result result = Result.build(null,ResultCodeEnum.NOTLOGIN);
+
+        if(token != null &&!JwtHelper.isExpiration(token)){
+            // 未过期
+            result = Result.ok(null);
+        }
+
+        WebUtil.writeJson(resp,result);
+
+
+    }
 }

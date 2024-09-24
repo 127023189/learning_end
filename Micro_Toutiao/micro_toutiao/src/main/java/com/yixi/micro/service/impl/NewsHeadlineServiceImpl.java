@@ -15,7 +15,18 @@ import java.util.Map;
 
 public class NewsHeadlineServiceImpl implements NewsHeadlineService {
 
+
+
     private NewsHeadlineDao headlineDao= new NewsHeadlineDaoImpl();
+
+    @Override
+    public int removeByHid(int hid) {
+        return headlineDao.removeByHid(hid);
+    }
+    public int updateNewsHeadline(NewsHeadline newsHeadline) {
+        return headlineDao.updateNewsHeadline(newsHeadline);
+    }
+
     @Override
     public Map<String, Object> findPage(HeadlineQueryVo headLineQueryVo) {
         Map<String,Object> pageInfo =new HashMap<>();
@@ -47,5 +58,20 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
         headlineDao.increasePageViews(hid);
 
         return headlineDao.findHeadlineDetail(hid);
+    }
+
+    /**
+     * 添加新闻
+     * @param newsHeadline
+     * @return
+     */
+    @Override
+    public Integer addNewsHeadline(NewsHeadline newsHeadline) {
+        return headlineDao.addNewsHeadline(newsHeadline);
+    }
+
+    @Override
+    public NewsHeadline findHeadlineByHid(int hid) {
+        return headlineDao.findHeadlineByHid(hid);
     }
 }
