@@ -33,4 +33,10 @@ public class NewsUserDaoImpl extends BaseDao implements NewsUserDao {
         List<NewsUser> users = baseQuery(NewsUser.class, sql,uid);
         return users != null && users.size() > 0 ? users.get(0):null;
     }
+
+    @Override
+    public int registUser(NewsUser registerUser) {
+        String sql = "insert into news_user values(null,?,?,?)";
+        return baseUpdate(sql,registerUser.getUsername(),registerUser.getUserPwd(),registerUser.getNickName());
+    }
 }

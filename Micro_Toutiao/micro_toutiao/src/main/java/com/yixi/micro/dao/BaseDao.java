@@ -12,16 +12,18 @@ public class BaseDao {
 
     // 返回单个的查询
     public <T> T baseQueryObject(Class<T> clazz,String sql,Object ... args){
-    T t = null;
+        T t = null;
         Connection connection = JDBCUtil.getConnection();
         PreparedStatement preparedStatement = null;
         int rows = 0;
         ResultSet resultSet = null;
 
         try {
+            preparedStatement = connection.prepareStatement(sql);
             for(int i = 0;i < args.length;i ++){
                 preparedStatement.setObject(i+1,args[i]);
             }
+
               resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()){

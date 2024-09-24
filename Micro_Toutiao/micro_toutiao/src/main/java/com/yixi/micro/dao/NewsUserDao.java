@@ -15,4 +15,11 @@ public interface NewsUserDao {
      * @return
      */
     NewsUser findByUid(Integer uid);
+
+    /**
+     * 根据表单信息进行注册
+     * @param registerUser
+     * @return
+     */
+    int registUser(NewsUser registerUser);
 }

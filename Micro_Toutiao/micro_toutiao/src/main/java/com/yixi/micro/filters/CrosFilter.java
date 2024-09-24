@@ -19,6 +19,9 @@ public class CrosFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request =(HttpServletRequest) servletRequest;
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+
         response.setHeader("Access-Control-Allow-Origin", "*"); //  表示允许所有源（即任何域名）访问
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, HEAD"); // 指定允许哪些 HTTP 方法（请求方式）可以跨域访问
         response.setHeader("Access-Control-Max-Age", "3600");// 这行设置了预检请求（OPTIONS 请求）的缓存时间

@@ -84,6 +84,52 @@ public class NewsUserController extends BaseController{
         }
         //响应给客户端
         WebUtil.writeJson(resp,result);
+    }
+
+    /**
+     * 校验用户是否存在
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void checkUserName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获取账号
+        String username = req.getParameter("username");
+        //根据用户名查询用户信息
+        NewsUser newsUser = userService.findByUsername(username);
+        Result result = Result.ok(null);
+        if(null != newsUser){
+            // 被占用
+
+            result = Result.build(null,ResultCodeEnum.USERNAME_USED);
+        }
+        System.out.println(result.getCode());
+        WebUtil.writeJson(resp,result);
+    }
+
+    /**
+     * 完成注册的业务接口
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //接受json信息
+        NewsUser registerUser = WebUtil.readJson(req, NewsUser.class);
+
+        Result result = null;
+        //调用服务层
+        NewsUser newsUser = userService.findByUsername(registerUser.getUsername());
+        if(newsUser != null){
+            result = Result.build(null,ResultCodeEnum.USERNAME_USED);
+        }else{
+            //可以注册
+            userService.registUser(registerUser);
+            result = Result.ok(null);
+        }
+        WebUtil.writeJson(resp,result);
 
     }
 }
